@@ -20,7 +20,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
-import java.math.BigDecimal;
 
 /**
  * Applies shear transformation to image
@@ -71,13 +70,16 @@ public class ImageShear extends CustomJavaAction<java.lang.Boolean>
 				
 				try {
 
-					image = ImageIO.read(Core.getImage(context, __OriginalImage, false));
-					
+					image = ImageIO.read(Core.getImage(context, __OriginalImage, false));				
+										
 					// If no values given, assume default values
-					if (xShear == null) {xShear = new BigDecimal("1");}
-					if (yShear == null) {yShear = new BigDecimal("1");}
-
-					shearedImage = shearTransform(image, xShear.floatValue(), yShear.floatValue());
+					float xTemp = 0.0f;
+					float yTemp = 0.0f;
+					
+					if (xShear != null) {xTemp = xShear.floatValue();}
+					if (yShear != null) {yTemp = yShear.floatValue();}
+						
+					shearedImage = shearTransform(image, xTemp, yTemp);
 					outputStream = new ByteArrayOutputStream();
 					ImageIO.write(shearedImage, extension, outputStream);
 					inputStream = new ByteArrayInputStream(outputStream.toByteArray());

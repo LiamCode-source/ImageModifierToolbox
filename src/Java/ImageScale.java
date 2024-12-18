@@ -20,7 +20,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
-import java.math.BigDecimal;
 
 /**
  * Scales image. Providing different values for x and y will stretch the image
@@ -73,10 +72,13 @@ public class ImageScale extends CustomJavaAction<java.lang.Boolean>
 					image = ImageIO.read(Core.getImage(context, __OriginalImage, false));
 					
 					// If no values given, assume default values
-					if (xScale == null) {xScale = new BigDecimal("1");}
-					if (yScale == null) {yScale = new BigDecimal("1");}
+					float xTemp = 1.0f;
+					float yTemp = 1.0f;
+					
+					if (xScale != null) {xTemp = xScale.floatValue();}
+					if (yScale != null) {yTemp = yScale.floatValue();}
 						
-					scaledImage = scaleTransform(image, xScale.floatValue(), yScale.floatValue());
+					scaledImage = scaleTransform(image, xTemp, yTemp);
 					outputStream = new ByteArrayOutputStream();
 					ImageIO.write(scaledImage, extension, outputStream);
 					inputStream = new ByteArrayInputStream(outputStream.toByteArray());

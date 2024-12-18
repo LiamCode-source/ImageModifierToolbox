@@ -22,7 +22,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
-import java.math.BigDecimal;
 
 /**
  * Increases/decreases opacity of image
@@ -71,13 +70,16 @@ public class ImageOpacity extends CustomJavaAction<java.lang.Boolean>
 				
 				try {
 					
-					image = ImageIO.read(Core.getImage(context, __OriginalImage, false));
+					image = ImageIO.read(Core.getImage(context, __OriginalImage, false));					
 					
 					// If no value given, assume default values
-					if (Opacity == null) {Opacity = new BigDecimal("1");}
+					if (Opacity == null) {
+						opacityImage = opacityTransform(image, 1.0f);
+					}
+					else {
+						opacityImage = opacityTransform(image, Opacity.floatValue());
+					}
 					
-
-					opacityImage = opacityTransform(image, Opacity.floatValue());
 					outputStream = new ByteArrayOutputStream();
 					ImageIO.write(opacityImage, extension, outputStream);
 					inputStream = new ByteArrayInputStream(outputStream.toByteArray());

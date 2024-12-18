@@ -20,7 +20,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
-import java.math.BigDecimal;
 
 /**
  * Rotates image clockwise/anticlockwise
@@ -74,9 +73,12 @@ public class ImageRotate extends CustomJavaAction<java.lang.Boolean>
 					image = ImageIO.read(Core.getImage(context, __OriginalImage, false));
 					
 					// If no value given, assume default values
-					if (RotationDegrees == null) {RotationDegrees = new BigDecimal("0");}
-
-					rotatedImage = rotateTransform(image, Direction.name().toLowerCase(), RotationDegrees.floatValue());
+					if (RotationDegrees == null) {
+						rotatedImage = rotateTransform(image, Direction.name().toLowerCase(), 0.0f);
+					}
+					else {
+						rotatedImage = rotateTransform(image, Direction.name().toLowerCase(), RotationDegrees.floatValue());
+					}
 					outputStream = new ByteArrayOutputStream();
 					ImageIO.write(rotatedImage, extension, outputStream);
 					inputStream = new ByteArrayInputStream(outputStream.toByteArray());
