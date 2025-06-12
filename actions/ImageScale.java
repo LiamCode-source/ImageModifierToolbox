@@ -21,6 +21,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
 import java.math.BigDecimal;
+import imagemodifiertoolbox.global.CheckFile;
 
 /**
  * Scales image. Providing different values for x and y will stretch the image
@@ -47,10 +48,13 @@ public class ImageScale extends CustomJavaAction<java.lang.Boolean>
 
 		// BEGIN USER CODE
 		String filename = OriginalImage.getName();
-		String extension = filename.substring(filename.lastIndexOf(".") + 1, filename.length());
+		String[] validExt = {"jpeg", "jpg", "png", "JPG", "PNG"};
+		
+		String extension = CheckFile.getFIleExt(filename);		
+		boolean isValidExt = CheckFile.checkFileExt(extension, validExt);
 		
 		// Checks image is in valid format for modification
-		if (!extension.equals("jpg") && !extension.contentEquals("jpeg") && !extension.contentEquals("png")) {
+		if (!isValidExt) {
 			Core.getLogger("ImageModifier").error("The file must be a jpg, jpeg or png file.");
 		}
 		else {	
