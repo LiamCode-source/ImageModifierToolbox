@@ -24,6 +24,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
 import java.awt.image.RescaleOp;
+import imagemodifiertoolbox.global.CheckFile;
 
 /**
  * Modifies the brightness/contrast of image
@@ -50,10 +51,13 @@ public class ImageBrightnessAndContrast extends CustomJavaAction<java.lang.Boole
 
 		// BEGIN USER CODE
 		String filename = OriginalImage.getName();
-		String extension = filename.substring(filename.lastIndexOf(".") + 1, filename.length());
+		String[] validExt = {"png", "PNG", "jpg", "JPG", "jpeg"};
+		
+		String extension = CheckFile.getFIleExt(filename);		
+		boolean isValidExt = CheckFile.checkFileExt(extension, validExt);
 		
 		// Checks image is in valid format for modification
-		if (!extension.equals("png")) {
+		if (!isValidExt) {
 			Core.getLogger("ImageModifier").error("The file must be a png file.");
 		}
 		else {	
