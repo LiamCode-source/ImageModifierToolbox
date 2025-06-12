@@ -72,12 +72,15 @@ public class ImageRotate extends CustomJavaAction<java.lang.Boolean>
 
 					image = ImageIO.read(Core.getImage(context, __OriginalImage, false));
 					
+					// If no direction given, assume clockwise
+					String directionString = (Direction != null) ? Direction.name().toLowerCase(): "clockwise";
+					
 					// If no value given, assume default values
 					if (RotationDegrees == null) {
-						rotatedImage = rotateTransform(image, Direction.name().toLowerCase(), 0.0f);
+						rotatedImage = rotateTransform(image, directionString, 0.0f);
 					}
 					else {
-						rotatedImage = rotateTransform(image, Direction.name().toLowerCase(), RotationDegrees.floatValue());
+						rotatedImage = rotateTransform(image, directionString, RotationDegrees.floatValue());
 					}
 					outputStream = new ByteArrayOutputStream();
 					ImageIO.write(rotatedImage, extension, outputStream);
