@@ -1,8 +1,10 @@
-# ImageModifierToolbox - Version 1.0
+# ImageModifierToolbox - Version 1.1
 This Mendix module contains multiple Java actions that can be used to modify images.
 
 ## Java Actions
 - **ImageBrightnessAndContrast**: Currently only works with PNG images. Modifies the brightness and/or contrast of input image.
+
+- **ImageChangeColour**: Currently only works with PNG images. Change an imgae to grayscale or add a coloured tint.
 
 - **ImageConvertToPNG**: Converts Jpg, Jpeg, and WEBP images to PNG. Userful when wanting to use Java actions that 
 require image to be in the PNG format.
