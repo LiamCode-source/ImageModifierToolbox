@@ -20,6 +20,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
+import imagemodifiertoolbox.global.CheckFile;
 
 /**
  * Flips image horizontally and/or vertically 
@@ -46,10 +47,13 @@ public class ImageFlip extends CustomJavaAction<java.lang.Boolean>
 
 		// BEGIN USER CODE
 		String filename = OriginalImage.getName();
-		String extension = filename.substring(filename.lastIndexOf(".") + 1, filename.length());
+		String[] validExt = {"png", "PNG", "jpeg", "jpg", "JPG", "webp"};
+		
+		String extension = CheckFile.getFIleExt(filename);		
+		boolean isValidExt = CheckFile.checkFileExt(extension, validExt);
 		
 		// Checks image is in valid format for modification
-		if (!extension.equals("jpg") && !extension.contentEquals("jpeg") && !extension.contentEquals("png") && !extension.contentEquals("webp")) {
+		if (!isValidExt) {
 			Core.getLogger("ImageModifier").error("The file must be a jpg, jpeg or png file.");
 		}
 		else {	
