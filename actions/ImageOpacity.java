@@ -22,6 +22,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
+import imagemodifiertoolbox.global.CheckFile;
 
 /**
  * Increases/decreases opacity of image
@@ -46,11 +47,14 @@ public class ImageOpacity extends CustomJavaAction<java.lang.Boolean>
 
 		// BEGIN USER CODE
 		String filename = OriginalImage.getName();
-		String extension = filename.substring(filename.lastIndexOf(".") + 1, filename.length());
+		String[] validExt = {"png", "PNG", "jpeg", "jpg", "JPG"};
+		
+		String extension = CheckFile.getFIleExt(filename);		
+		boolean isValidExt = CheckFile.checkFileExt(extension, validExt);
 		
 		// Checks image is in valid format for modification
-		if (!extension.equals("png")) {
-			Core.getLogger("ImageModifier").error("The file must be a png file.");
+		if (!isValidExt) {
+			Core.getLogger("ImageModifier").error("The file must be a jpg, jpeg or png file.");
 		}
 		else {	
 			if (__OriginalImage == null) {
@@ -115,7 +119,7 @@ public class ImageOpacity extends CustomJavaAction<java.lang.Boolean>
 
 	// BEGIN EXTRA CODE
 	public BufferedImage opacityTransform(BufferedImage image, float opacity) {
-		BufferedImage modImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+		BufferedImage modImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = modImage.createGraphics();
 		g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
 		g.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), null);
