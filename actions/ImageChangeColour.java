@@ -14,8 +14,6 @@ import com.mendix.webui.CustomJavaAction;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import com.mendix.core.Core;
 import java.io.ByteArrayOutputStream;
 import java.io.ByteArrayInputStream;
@@ -23,6 +21,7 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 import java.awt.AlphaComposite;
 import java.awt.Color;
+import imagemodifiertoolbox.global.CheckFile;
 
 /**
  * Change an imgae to grayscale or add a coloured tint
@@ -47,11 +46,14 @@ public class ImageChangeColour extends CustomJavaAction<java.lang.Boolean>
 
 		// BEGIN USER CODE
 		String filename = OriginalImage.getName();
-		String extension = filename.substring(filename.lastIndexOf(".") + 1, filename.length());
+		String[] validExt = {"jpeg", "jpg", "png", "JPG", "PNG"};
+		
+		String extension = CheckFile.getFIleExt(filename);		
+		boolean isValidExt = CheckFile.checkFileExt(extension, validExt);
 		
 		// Checks image is in valid format for modification
-		if (!extension.equals("png")) {
-			Core.getLogger("ImageModifier").error("The file must be a png file.");
+		if (!isValidExt) {
+			Core.getLogger("ImageModifier").error("The file must be a jpg, jpeg or png file.");
 		}
 		else {	
 			if (__OriginalImage == null) {
@@ -115,7 +117,7 @@ public class ImageChangeColour extends CustomJavaAction<java.lang.Boolean>
 
 	// BEGIN EXTRA CODE
 	public BufferedImage colourTransform(BufferedImage image, String colourLowerCase) {	
-		int colourType = BufferedImage.TYPE_INT_ARGB; // Default style
+		int colourType = BufferedImage.TYPE_INT_RGB; // Default style
 		Color applyTint = Color.RED;
 		
 		switch (colourLowerCase) {
