@@ -22,6 +22,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
+import java.math.BigDecimal;
 import imagemodifiertoolbox.global.CheckFile;
 
 /**
@@ -76,8 +77,9 @@ public class ImageOpacity extends CustomJavaAction<java.lang.Boolean>
 					
 					image = ImageIO.read(Core.getImage(context, __OriginalImage, false));					
 					
-					// If no value given, assume default values
-					if (Opacity == null) {
+					// If no valud value given, assume default values
+					if (Opacity == null || Opacity.compareTo(BigDecimal.ZERO) < 0 || Opacity.compareTo(BigDecimal.ONE) > 0) {
+						Core.getLogger("ImageModifier").warn("Invalid opacity value. Reverting opacity to 1.0.");
 						opacityImage = opacityTransform(image, 1.0f);
 					}
 					else {
