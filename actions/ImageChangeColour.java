@@ -119,29 +119,49 @@ public class ImageChangeColour extends CustomJavaAction<java.lang.Boolean>
 	public BufferedImage colourTransform(BufferedImage image, String colourLowerCase) {	
 		int colourType = BufferedImage.TYPE_INT_RGB; // Default style
 		Color applyTint = Color.RED;
+		String[] valColours = {"grayscale", "blue", "cyan", "green", "orange", "pink", "purple", "red", "yellow"};
 		
 		switch (colourLowerCase) {
 			case "grayscale":
 				colourType = BufferedImage.TYPE_BYTE_GRAY; // grayscale
 				break;
-			case "red":
-				applyTint = Color.RED;
-				break;
 			case "blue":
 				applyTint = Color.BLUE;
 				break;
+			case "cyan":
+				applyTint = Color.CYAN;
+				break;
 			case "green":
 				applyTint = Color.GREEN;
+				break;
+			case "orange":
+				applyTint = Color.ORANGE;
+				break;
+			case "pink":
+				applyTint = Color.PINK;
+				break;
+			case "purple":
+				applyTint = Color.MAGENTA;
+				break;
+			case "red":
+				applyTint = Color.RED;
+				break;
+			case "yellow":
+				applyTint = Color.YELLOW;
 				break;
 		}
 		
 		BufferedImage colouredImage = new BufferedImage(image.getWidth(), image.getHeight(), colourType);  
 		Graphics2D g = colouredImage.createGraphics();
 		g.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), null); 
-		if (colourLowerCase.equals("red") || colourLowerCase.equals("blue") || colourLowerCase.equals("green")) {
-			g.setComposite(AlphaComposite.SrcAtop.derive(0.3f));
-			g.setColor(applyTint);
-			g.fillRect(0, 0, image.getWidth(), image.getHeight());
+		
+		for (String valColour : valColours) {
+			if (colourLowerCase.equals(valColour)) {
+				g.setComposite(AlphaComposite.SrcAtop.derive(0.3f));
+				g.setColor(applyTint);
+				g.fillRect(0, 0, image.getWidth(), image.getHeight());
+				break;
+			}
 		}
 		g.dispose(); 
 			
