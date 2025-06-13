@@ -81,8 +81,11 @@ public class ImageScale extends CustomJavaAction<java.lang.Boolean>
 					float yTemp = 1.0f;
 					
 					if (xScale != null && xScale.compareTo(BigDecimal.ZERO) > 0) {xTemp = xScale.floatValue();}
+					else {Core.getLogger("ImageModifier").warn("Invalid x scale value. Reverting x scale to 1.0.");}
+					
 					if (yScale != null && yScale.compareTo(BigDecimal.ZERO) > 0) {yTemp = yScale.floatValue();}
-						
+					else {Core.getLogger("ImageModifier").warn("Invalid y scale value. Reverting y scale to 1.0.");}
+					
 					scaledImage = scaleTransform(image, xTemp, yTemp);
 					outputStream = new ByteArrayOutputStream();
 					ImageIO.write(scaledImage, extension, outputStream);
