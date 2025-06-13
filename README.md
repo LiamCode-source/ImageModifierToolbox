@@ -1,20 +1,22 @@
-# ImageModifierToolbox - Version 1.1
+# ImageModifierToolbox - Version 1.2
 This Mendix module contains multiple Java actions that can be used to modify images.
 
+All actions currently work with jpg, jpeg, and png images.
 ## Java Actions
-- **ImageBrightnessAndContrast**: Currently only works with PNG images. Modifies the brightness and/or contrast of input image.
+- **ImageBrightnessAndContrast**: Modifies the brightness and/or contrast of input image. With contrast offse, -100 is very high contrast and 100 is very low contrast.
 
-- **ImageChangeColour**: Currently only works with PNG images. Change an imgae to grayscale or add a coloured tint.
+- **ImageChangeColour**: Change an imgae to grayscale or add a coloured tint.
 
-- **ImageConvertToPNG**: Converts Jpg, Jpeg, and WEBP images to PNG. Userful when wanting to use Java actions that 
-require image to be in the PNG format.
+- **ImageConvertToPNG**: Converts Jpg, Jpeg, and WEBP images to PNG. Userful when wanting to use Java actions that require image to be in the PNG format.
 
-- **ImageFlip**: Currently works with Jpg, Jpeg, and PNG images. Flips images horizontally and/or vertically
+- **ImageFlip**: Flips images horizontally and/or vertically
 
-- **ImageOpacity**: Currently works with PNG images. Modifies the opacity of input image.
+- **ImageOpacity**: Modifies the opacity of input image. Default value is 1. Value should be between 0 and 1.
 
-- **ImageRotate**: Currently works with Jpg, Jpeg, and PNG images. Rotates image clockwise/anticlockwise.
+- **ImageRotate**: Rotates image clockwise/anticlockwise.
 
-- **ImageScale**: Currently works with Jpg, Jpeg, and PNG images. Scales the input image horizontally and vertically.
+- **ImageScale**: Scales the input image horizontally and vertically. Default scale values are 1 (no scale). 
+Values between 0 and 1 will decrease scale. Values greater than 1 will increase scale.
 
-- **ImageShear**: Currently works with Jpg, Jpeg, and PNG images. Shears input image.
+- **ImageShear**: Shears input image horizontally and/or vertically. Default shear values are 0 (no shear).
+values can be positive or negative
