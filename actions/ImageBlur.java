@@ -24,6 +24,9 @@ import java.awt.*;
 import java.math.BigDecimal;
 import imagemodifiertoolbox.global.CheckFile;
 
+/**
+ * Blurs an image
+ */
 public class ImageBlur extends CustomJavaAction<java.lang.Boolean>
 {
 	private IMendixObject __OriginalImage;
@@ -72,11 +75,11 @@ public class ImageBlur extends CustomJavaAction<java.lang.Boolean>
 				try {
 
 					image = ImageIO.read(Core.getImage(context, __OriginalImage, false));
-					float floatBlurScale = 0.0f;
+					float floatBlurScale = -1.0f;
 					
-					if (BlurScale != null && BlurScale.compareTo(BigDecimal.ZERO) > 0 && BlurScale.compareTo(BigDecimal.ONE) < 1) {floatBlurScale = BlurScale.floatValue();}
+					if (BlurScale != null && BlurScale.compareTo(BigDecimal.ZERO) >= 0 && BlurScale.compareTo(BigDecimal.ONE) < 1) {floatBlurScale = BlurScale.floatValue();}
 					else {Core.getLogger("ImageModifier").warn("Invalid blur scale, Blur effect will not be applied.");}
-					if (floatBlurScale <= 0.0f) {
+					if (floatBlurScale < 0.0f) {
 						return false; // No blur
 					}
 					
