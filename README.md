@@ -1,10 +1,10 @@
-# ImageModifierToolbox - Version 1.3
+# ImageModifierToolbox - Version 1.4
 This Mendix module contains multiple Java actions that can be used to modify images.
 
 All actions currently work with jpg, jpeg, and png images.
 ## Java Actions
 
-- **ImageBlue**: Blurs an image. Blur scale 0 is no blur and 1 is maximum blur.
+- **ImageBlur**: Blurs an image. Blur scale 0 is no blur and 1 is maximum blur.
 
 - **ImageBrightnessAndContrast**: Modifies the brightness and/or contrast of input image. With contrast offset, -100 is very high contrast and 100 is very low contrast.
 <p>
@@ -12,6 +12,8 @@ All actions currently work with jpg, jpeg, and png images.
 </p>
 
 - **ImageChangeColour**: Change an imgae to grayscale or add a coloured tint.
+
+- **ImageCompress**: Compresses images from a scale between "high compression is important" and "high quality is important"
 
 - **ImageConvertToPNG**: Converts Jpg, Jpeg, and WEBP images to PNG. Userful when wanting to use Java actions that require image to be in the PNG format.
 
