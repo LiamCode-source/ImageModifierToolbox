@@ -94,8 +94,8 @@ public class ImageChangeColour extends CustomJavaAction<java.lang.Boolean>
 					Core.getLogger("ImageModifier").error(e.getMessage(), e);
 					return false;
 				} finally {
-					inputStream.close();
-					outputStream.close();
+					if (inputStream != null) inputStream.close();
+					if (outputStream != null) outputStream.close();
 					}
 				}
 			}
@@ -172,3 +172,4 @@ public class ImageChangeColour extends CustomJavaAction<java.lang.Boolean>
 	
 	// END EXTRA CODE
 }
+
