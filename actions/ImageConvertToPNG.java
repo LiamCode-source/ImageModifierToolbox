@@ -50,7 +50,6 @@ public class ImageConvertToPNG extends CustomJavaAction<java.lang.Boolean>
 
 		BufferedImage image = null;
 		BufferedImage opacityImage = null;
-		InputStream inputStream = null;
 		ByteArrayOutputStream outputStream = null;
 		boolean result = false;
 
@@ -79,8 +78,7 @@ public class ImageConvertToPNG extends CustomJavaAction<java.lang.Boolean>
 			Core.getLogger("ImageModifier").error(e.getMessage(), e);
 			return false;
 		} finally {
-			//inputStream.close();
-			outputStream.close();
+			if (outputStream != null) outputStream.close();
 		}
 		return false;
 		// END USER CODE
