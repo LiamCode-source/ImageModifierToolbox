@@ -20,6 +20,9 @@ All actions currently work with jpg, jpeg, and png images.
 - **ImageFlip**: Flips images horizontally and/or vertically
 
 - **ImageInvertColour**: Inverts the colour of an image
+<p>
+  <img src="./ImageExampleInvert.PNG" alt="Example of the invert colour Java action being used on an image" height="150">
+</p>
 
 - **ImageOpacity**: Modifies the opacity of input image. Default value is 1. Value should be between 0 and 1.
 
