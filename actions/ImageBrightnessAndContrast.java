@@ -95,8 +95,8 @@ public class ImageBrightnessAndContrast extends CustomJavaAction<java.lang.Boole
 					Core.getLogger("ImageModifier").error(e.getMessage(), e);
 					return false;
 				} finally {
-					inputStream.close();
-					outputStream.close();
+					if (inputStream != null) inputStream.close();
+					if (outputStream != null) outputStream.close();
 					}
 				}
 			}
@@ -125,3 +125,4 @@ public class ImageBrightnessAndContrast extends CustomJavaAction<java.lang.Boole
 	}
 	// END EXTRA CODE
 }
+
